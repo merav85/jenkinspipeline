@@ -1,10 +1,10 @@
 pipeline {
     agent any
     
-    parameters { 
+    /* parameters { 
          string(name: 'tomcat_stg', defaultValue: '54.194.123.193', description: 'Staging Server')
          string(name: 'tomcat_prod', defaultValue: '34.241.180.58', description: 'Production Server')
-    } 
+    }  */
 
     triggers {
          pollSCM('* * * * *') // Polling Source Control
@@ -27,13 +27,15 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp -i /home/jenkins/tomcat.pem **/target/*.war ec2-user@${params.tomcat_stg}:/var/lib/tomcat7/webapps"
+                        echo "building stg"
+                        //sh "scp -i /home/jenkins/tomcat.pem **/target/*.war ec2-user@${params.tomcat_stg}:/var/lib/tomcat7/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "scp -i /home/jenkins/tomcat.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
+                        echo "building prod"
+                        //sh "scp -i /home/jenkins/tomcat.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
                     }
                 }
             }
