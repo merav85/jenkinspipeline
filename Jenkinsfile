@@ -27,14 +27,14 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        echo "building stg"
+                        echo "building staging"
                         //sh "scp -i /home/jenkins/tomcat.pem **/target/*.war ec2-user@${params.tomcat_stg}:/var/lib/tomcat7/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        echo "building prod"
+                        echo "building production"
                         //sh "scp -i /home/jenkins/tomcat.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
                     }
                 }
